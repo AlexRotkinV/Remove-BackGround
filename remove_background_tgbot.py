@@ -6,13 +6,13 @@ import telebot
 from telebot import types
 import os
 
-bot = telebot.TeleBot("BOT_TOKEN")
+bot = telebot.TeleBot(BOT_TOKEN)
 
-link = hlink("Àëåêñåé Ðîòêèí", "https://t.me/akexrotkin_prog")
+link = hlink("Алексей Роткин", "https://t.me/akexrotkin_prog")
 title = f"""
-Ïðèâåò! Ïðèøëè ìíå ôîòî, à ÿ óáåðó èç íå¸ ôîí è îòïðàâëþ òåáå â PNG.
+Привет! Пришли мне фото, а я уберу из неё фон и отправлю тебе в PNG.
     
-Áîò ðàçðàáîòàë {link}
+Бот разработал {link}
     """
 
 def remove_background(message):
@@ -46,12 +46,12 @@ def main():
     def start(message):
         photo = open(os.path.join("photos", "cover.png"), 'rb')
         markup = types.InlineKeyboardMarkup()
-        markup.add(types.InlineKeyboardButton("Êàíàë àâòîðà", url="https://t.me/akexrotkin_prog"))
+        markup.add(types.InlineKeyboardButton("Канал автора", url="https://t.me/akexrotkin_prog"))
         bot.send_photo(message.chat.id, photo, caption=title, reply_markup=markup, parse_mode="HTML")
 
     @bot.message_handler()
     def text(message):
-        bot.send_message(message.chat.id, "Ïðèøëè ìíå ôîòî!")
+        bot.send_message(message.chat.id, "Пришли мне фото!")
 
     @bot.message_handler(content_types=['photo'])
     def handle_photo(message):
